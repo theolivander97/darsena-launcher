@@ -1,7 +1,11 @@
 # Cómo añadir juegos al catálogo
 
-El catálogo es `catalog/catalog.json`: una lista de **ports**, uno por línea. Cada port apunta a un repositorio de GitHub.
-El launcher descarga de ahí la build de Windows más reciente, así que no hace falta poner enlaces de descarga.
+El catálogo es `catalog/catalog.json`: una lista de **ports**, uno por línea. Cada port dice **de dónde sale** con `origin`:
+
+- `"origin": "github"` (lo normal): el port tiene repositorio en GitHub. El launcher descarga de ahí la build de Windows
+  más reciente, así que no hace falta poner enlaces de descarga.
+- `"origin": "external"`: el port **no está en GitHub** (ModDB, Discord, una web…). El catálogo solo lo da a conocer;
+  para instalarlo, el usuario necesita una **fuente** que traiga el port (torrent o mirror). Ver [Ports externos](#ports-externos).
 
 ## Pasos rápidos
 
@@ -31,6 +35,12 @@ Lo mínimo son tres campos. Lo demás se rellena solo al ejecutar `actualizar.mj
 {"title":"Nombre del juego","repo":"usuario/repositorio","console":"Nintendo 64"},
 ```
 
+Port externo (no está en GitHub):
+
+```json
+{"title":"Nombre del juego","port":"Nombre del proyecto","author":"Autor","origin":"external","homepage":"https://www.moddb.com/mods/...","console":"Xbox 360"},
+```
+
 Completa (lo recomendable):
 
 ```json
@@ -42,7 +52,11 @@ Completa (lo recomendable):
 | Campo | ¿Obligatorio? | Qué poner |
 |---|---|---|
 | `title` | Sí | Nombre **del juego**, no del proyecto: `"Crash Bandicoot 2: Cortex Strikes Back"`, no `"Crash2Recomp"`. Es lo que sale en la tienda. |
-| `repo` | Sí | Repositorio de GitHub como `usuario/repositorio` (lo que va después de `github.com/`). |
+| `origin` | No | `"github"` (por defecto) o `"external"` si el port no está en GitHub. |
+| `repo` | Sí, si es de GitHub | Repositorio de GitHub como `usuario/repositorio` (lo que va después de `github.com/`). Los externos no lo llevan. |
+| `port` | Sí, si es externo | Nombre del proyecto del port. En los de GitHub se saca del repo. |
+| `author` | No | Autor del port. En los de GitHub se saca del repo; en los externos, si falta, sale "autor desconocido". |
+| `homepage` | No | Página oficial del proyecto (`https://…`). En los externos es el enlace que ve el usuario en lugar de "Ver en GitHub". |
 | `console` | Sí | Consola original. Una de: `Nintendo 64`, `Super Nintendo`, `NES`, `Game Boy`, `Game Boy Advance`, `Nintendo DS`, `Nintendo 3DS`, `GameCube`, `Wii`, `Wii U`, `Switch`, `Virtual Boy`, `PlayStation`, `PlayStation 2`, `PlayStation 3`, `PlayStation 4`, `PSP`, `Xbox`, `Xbox 360`, `Sega`, `Arcade`, `PC`, `Otros`. |
 | `franchise` | No | Saga, por ejemplo `"The Legend of Zelda"`. |
 | `aliases` | No | Otros nombres para la búsqueda y para emparejar enlaces de fuentes: `["CTR","Crash Team Racing"]`. |
@@ -52,7 +66,7 @@ Completa (lo recomendable):
 | `needs` | No | Qué datos acepta el port: `["iso","carpeta"]`, `["z64"]`… Si falta, se usan los de su consola (N64 → z64/n64/v64, GameCube → iso/rvz/gcm/ciso, Xbox 360 → iso/carpeta…). Ponlo solo si el port difiere. |
 | `needsNote` | No | Aclaración que verá el usuario: región o versión exigida, archivo concreto… |
 | `platforms` | No | Dónde funciona el port: `["Windows"]`, `["Windows","Linux","macOS"]`… Por defecto, `["Windows"]`. |
-| `id`, `author`, `port`, `game` | No | **No los toques**: se calculan solos a partir de `repo` y `title`. |
+| `id`, `game` | No | **No los toques**: se calculan solos a partir de `repo` (o `author` + `port`) y `title`. |
 
 ### El campo `asset`
 
@@ -68,6 +82,19 @@ que dice cuál es el de Windows. Abre la página de *Releases* del repo, mira el
 - El punto se escribe `\\.` (con dos barras, porque estamos dentro de JSON).
 - `^` significa "empieza por" y `$` "termina en".
 - Solo hace falta cuando la release tiene varios `.zip` o `.exe` que podrían confundirse.
+
+## Ports externos
+
+Para ports que su autor publica fuera de GitHub:
+
+1. Añádelo al catálogo con `"origin":"external"`, `"port"` y, si la hay, `"homepage"`.
+2. Ejecuta `actualizar.mjs` y mira el `id` que le ha puesto (por ejemplo `autor-nombre-del-proyecto`).
+3. Las descargas van en una **fuente**, en su lista `downloads`, usando ese `id` como `gameId`
+   (ver *Formato de una fuente* en el README principal). Ahí se ponen el torrent y los mirrors del port; los datos
+   del juego van en la lista `data` de la misma fuente.
+
+Sin una fuente que lo traiga, el launcher muestra el juego pero el botón dice **NECESITA UNA FUENTE**.
+Las reglas de [qué ports se pueden añadir](#qué-ports-se-pueden-añadir) son las mismas: el port no puede incluir el juego.
 
 ## Varios ports del mismo juego
 
@@ -98,7 +125,7 @@ los datos del juego**. Pistas para comprobarlo:
 | Mensaje | Solución |
 |---|---|
 | `no es JSON válido … Línea N` | Revisa esa línea y el final de la anterior: falta o sobra una coma, o hay comillas sin cerrar. |
-| `falta "title"` / `"repo"` / `"console"` | Añade ese campo. |
+| `falta "title"` / `"repo"` / `"console"` | Añade ese campo. Si el port no está en GitHub, pon `"origin":"external"` y `"port"` en lugar de `repo`. |
 | `consola "…" no válida` | Usa exactamente uno de los nombres de la tabla (con mayúsculas y espacios). |
 | `"asset" no es una regex válida` | Revisa los `\\.` y que los paréntesis estén cerrados. |
 | `id "…" repetido` | Ese repo ya está en el catálogo. Búscalo con Ctrl+F y edita esa línea en lugar de añadir otra. |
