@@ -1,4 +1,20 @@
 {
- "updatedAt": "2026-10-17T19:10:47.994Z",
- "games": {}
+ "updatedAt": "2026-10-17T20:46:49.783Z",
+ "games": {
+  "cut-the-rope": {
+   "average": 1,
+   "count": 1,
+   "discussionUrl": "https://github.com/theolivander97/darsena-launcher/discussions/3",
+   "reviews": [
+    {
+     "user": "PePiNito69",
+     "avatar": "https://avatars.githubusercontent.com/u/109770450?u=7be555f6a053625c7243f7a33d27a239aeca51a9&v=4",
+     "url": "https://github.com/PePiNito69",
+     "rating": 1,
+     "text": "Cholito perdón que sea por acá, pero te traté de llamar y no me contestabas y tampoco me respondiste los mensajes. Encontré la información que me pediste.\nSe llama Síndrome del dedo travieso (cuando el dedo se te mete solo en el culo). Es super común en homosexuales de tu edad y no es peligroso. Pasa cuando ves a otro hombre que te calienta, también puede ser signo de hiperapendicitis rectal. Igual anda al doctor. No veas porno gay y cada vez que te toques lávate las manos para que no te dé conjuntivitis como la semana pasada, cuidate, un abrazo",
+     "date": "2026-10-17T20:46:36Z"
+    }
+   ]
+  }
+ }
 }
