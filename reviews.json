@@ -1,20 +1,4 @@
 {
- "updatedAt": "2026-10-17T19:10:04.984Z",
- "games": {
-  "call-of-duty-3": {
-   "average": 5,
-   "count": 1,
-   "discussionUrl": "https://github.com/theolivander97/darsena-launcher/discussions/2",
-   "reviews": [
-    {
-     "user": "theolivander97",
-     "avatar": "https://avatars.githubusercontent.com/u/289308776?v=4",
-     "url": "https://github.com/theolivander97",
-     "rating": 5,
-     "text": "Buen port xddd",
-     "date": "2026-10-17T19:09:51Z"
-    }
-   ]
-  }
- }
+ "updatedAt": "2026-10-17T19:10:47.994Z",
+ "games": {}
 }
