@@ -1,6 +1,8 @@
 <div align="center">
 
-# ▶ DÁRSENA
+<img src="docs/img/logo.svg" alt="Logo de Dársena" width="140">
+
+# DÁRSENA
 
 **El puerto de entrada a los ports de videojuegos hechos por la comunidad.**
 
