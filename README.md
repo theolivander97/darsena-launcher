@@ -92,6 +92,12 @@ El catálogo lo mantiene el autor de Dársena para que cada juego que entra func
 **[Pedir un juego](https://github.com/theolivander97/darsena-launcher/issues/new?template=pedir-un-juego.yml)**.
 ¿Algo no funciona? Usa **[Reportar un problema](https://github.com/theolivander97/darsena-launcher/issues/new?template=reportar-un-problema.yml)**.
 
+## Licencia
+
+- **Dársena y el catálogo:** © theolivander97, todos los derechos reservados.
+- **Las sinopsis de Wikipedia:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.es), con la fuente en cada juego.
+- **Portadas, capturas, juegos y ports:** de sus respectivos dueños.
+
 ## Créditos
 
 - Los **ports** pertenecen a sus autores; cada ficha enlaza a su proyecto.
