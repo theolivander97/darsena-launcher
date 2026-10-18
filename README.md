@@ -83,6 +83,37 @@ que dice cuál es el de Windows. Abre la página de *Releases* del repo, mira el
 - `^` significa "empieza por" y `$` "termina en".
 - Solo hace falta cuando la release tiene varios `.zip` o `.exe` que podrían confundirse.
 
+## Sinopsis, tráilers y destacados
+
+Cada ficha muestra de qué trata el juego y su tráiler. Eso sale de `catalog/info.json`, que **se genera** (no se edita a mano):
+
+```powershell
+node tools\catalog\informacion.mjs
+```
+
+Busca la sinopsis en Wikipedia (en español si existe) y solo acepta coincidencias seguras. Los juegos que no encuentra quedan
+en `catalog/info-pendientes.txt`. Lo que quieras poner o corregir a mano va en **`catalog/info-overrides.json`**, que siempre gana
+y nunca se sobrescribe:
+
+```json
+{
+  "featured": ["gears-of-war-2", "bloodborne"],
+  "games": {
+    "id-del-juego": {
+      "synopsis": { "text": "De qué trata…", "source": { "name": "Redacción de Dársena" } },
+      "trailers": [ { "kind": "youtube", "id": "EQx0flOIRXY", "title": "Tráiler de lanzamiento" } ]
+    }
+  }
+}
+```
+
+- **`featured`**: los juegos que salen siempre primero en el carrusel de *Destacados y novedades*, en ese orden.
+- **`id-del-juego`** es el campo `game` de `catalog.json` (el que agrupa los ports), no el `id` de un port.
+- **`trailers`**: `id` es lo que va después de `watch?v=` en la dirección de YouTube (11 caracteres). Comprueba que el vídeo permita
+  incrustarse: `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=<id>&format=json` debe responder con su título.
+- El texto de Wikipedia se muestra con su fuente y licencia (CC BY-SA 4.0).
+- `publicar.mjs` sube `info.json` junto al catálogo: los launchers lo descargan al abrirse, sin actualizar la app.
+
 ## Ports externos
 
 Para ports que su autor publica fuera de GitHub:

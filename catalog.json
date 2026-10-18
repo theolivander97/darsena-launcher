@@ -1,6 +1,6 @@
 {
 "schemaVersion": 1,
-"generatedAt": "2026-10-17",
+"generatedAt": "2026-10-18",
 "games": [
 {"id":"k4zmu2a-spacecadetpinball","title":"3D Pinball: Space Cadet","port":"spacecadetpinball","author":"k4zmu2a","origin":"github","repo":"k4zmu2a/spacecadetpinball","console":"PC","franchise":null,"aliases":["Space Cadet Pinball"],"asset":null,"exe":null,"experimental":false,"platforms":["Windows","Linux","macOS"],"addedAt":"2026-10-15","downloads":56853,"game":"3d-pinball-space-cadet"},
 {"id":"fearkov-3dsrecomp","title":"3dsrecomp + Zakuro · Nintendo 3DS Static Recompiler","port":"3dsrecomp","author":"fearkov","origin":"github","repo":"fearkov/3dsrecomp","console":"Nintendo 3DS","franchise":null,"aliases":["3dsrecomp","Zakuro","3DS recompilation"],"asset":null,"exe":null,"experimental":true,"platforms":["Windows","Linux"],"addedAt":"2026-10-15","downloads":0,"game":"3dsrecomp-zakuro"},
