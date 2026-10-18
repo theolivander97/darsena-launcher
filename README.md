@@ -1,162 +1,102 @@
-# Cómo añadir juegos al catálogo
+<div align="center">
 
-El catálogo es `catalog/catalog.json`: una lista de **ports**, uno por línea. Cada port dice **de dónde sale** con `origin`:
+# ▶ DÁRSENA
 
-- `"origin": "github"` (lo normal): el port tiene repositorio en GitHub. El launcher descarga de ahí la build de Windows
-  más reciente, así que no hace falta poner enlaces de descarga.
-- `"origin": "external"`: el port **no está en GitHub** (ModDB, Discord, una web…). El catálogo solo lo da a conocer;
-  para instalarlo, el usuario necesita una **fuente** que traiga el port (torrent o mirror). Ver [Ports externos](#ports-externos).
+**El puerto de entrada a los ports de videojuegos hechos por la comunidad.**
 
-## Pasos rápidos
+Un launcher al estilo Steam para descubrir, instalar y jugar ports nativos de PC:
+recompilaciones, descompilaciones y motores reescritos de clásicos de consola y de PC.
 
-1. **Abre** `catalog/catalog.json` con un editor (VS Code, Notepad++…).
-2. **Copia una línea** de un juego parecido y pégala debajo de `"games": [`. Cambia sus datos o usa la plantilla de abajo.
-   Cada línea termina en coma `,`, **excepto la última** de la lista.
-3. **Ejecuta** desde la carpeta del proyecto:
-   ```powershell
-   node tools\catalog\actualizar.mjs
-   ```
-   Comprueba que todo está bien, rellena lo que falta, agrupa los ports por juego y ordena el archivo.
-   Si hay un error te dice cuál y en qué línea, y **no guarda nada** hasta que lo corrijas.
-4. **Portada** (opcional, pero queda mejor):
-   ```powershell
-   cd tools\covers
-   node build-covers.mjs
-   node publish-covers.mjs "Portada de <juego>"
-   ```
-5. **Prueba** el launcher con `.\dev.ps1`. Para repartirlo, genera el instalador con `.\dev.ps1 build`.
-   El catálogo va dentro del launcher: quien quiera ver los juegos nuevos necesita la versión nueva.
+[![Última versión](https://img.shields.io/github/v/release/theolivander97/darsena-launcher?label=versi%C3%B3n&color=ffc20e&labelColor=111111)](https://github.com/theolivander97/darsena-launcher/releases/latest)
+[![Descargas](https://img.shields.io/github/downloads/theolivander97/darsena-launcher/total?label=descargas&color=ffc20e&labelColor=111111)](https://github.com/theolivander97/darsena-launcher/releases)
+![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-ffc20e?labelColor=111111)
 
-## Plantilla
+### [⬇ Descargar Dársena](https://github.com/theolivander97/darsena-launcher/releases/latest) · [📖 Wiki](https://github.com/theolivander97/darsena-launcher/wiki) · [🎮 Pedir un juego](https://github.com/theolivander97/darsena-launcher/issues/new?template=pedir-un-juego.yml)
 
-Lo mínimo son tres campos. Lo demás se rellena solo al ejecutar `actualizar.mjs`:
+<img src="docs/img/explorar.png" alt="Explorar: destacados y novedades" width="100%">
 
-```json
-{"title":"Nombre del juego","repo":"usuario/repositorio","console":"Nintendo 64"},
-```
+</div>
 
-Port externo (no está en GitHub):
+---
 
-```json
-{"title":"Nombre del juego","port":"Nombre del proyecto","author":"Autor","origin":"external","homepage":"https://www.moddb.com/mods/...","console":"Xbox 360"},
-```
+## ¿Qué es?
 
-Completa (lo recomendable):
+Cada vez salen más **ports nativos** de juegos clásicos: Star Fox 64, Gears of War 2, Bloodborne, Dino Crisis,
+Vice City Stories… Cada uno vive en su propio repositorio, con su propia forma de descargarse y de pedirte los archivos
+del juego. **Dársena los reúne en un solo sitio**, con la comodidad de una tienda:
 
-```json
-{"title":"Star Fox 64","repo":"HarbourMasters/Starship","console":"Nintendo 64","franchise":"Star Fox","aliases":["Starfox 64","SF64"],"asset":"^Starship-.*-Windows\\.zip$","exe":"Starship.exe","experimental":false,"platforms":["Windows","Linux","macOS"]},
-```
+- 🧭 **Explorar** un catálogo con más de 400 juegos, con portadas, sinopsis, tráilers y los más descargados.
+- 📚 **Biblioteca** propia: añade juegos, elige entre varios ports del mismo juego, instala con un clic y juega.
+- ⚡ **Descargas rápidas**: desde las versiones oficiales de GitHub, por torrent o por enlace directo con varias
+  conexiones a la vez. Pausar, reanudar y compartir lo que descargas.
+- 🧩 **Fuentes** al estilo Hydra: listas de enlaces que añades tú para traer tus propias copias de los juegos.
+- ⭐ **Reseñas, perfil y logros** con tu cuenta de GitHub, y el tiempo de juego de cada título.
+- 🔄 **Siempre al día**: el catálogo se actualiza solo y el launcher se actualiza a sí mismo, con firma verificada.
 
-## Campos
+<table>
+<tr>
+<td width="50%"><img src="docs/img/ficha.png" alt="Ficha de un juego con sinopsis y tráiler"></td>
+<td width="50%"><img src="docs/img/biblioteca.png" alt="Biblioteca con selector de ports"></td>
+</tr>
+<tr>
+<td align="center"><sub>Cada juego tiene su ficha: de qué trata, tráiler y ports disponibles.</sub></td>
+<td align="center"><sub>Varios ports del mismo juego: eliges cuál instalar desde la biblioteca.</sub></td>
+</tr>
+</table>
 
-| Campo | ¿Obligatorio? | Qué poner |
+## Cómo funciona
+
+Dársena separa **tres cosas** que otros launchers mezclan:
+
+| | Qué es | Quién lo pone |
 |---|---|---|
-| `title` | Sí | Nombre **del juego**, no del proyecto: `"Crash Bandicoot 2: Cortex Strikes Back"`, no `"Crash2Recomp"`. Es lo que sale en la tienda. |
-| `origin` | No | `"github"` (por defecto) o `"external"` si el port no está en GitHub. |
-| `repo` | Sí, si es de GitHub | Repositorio de GitHub como `usuario/repositorio` (lo que va después de `github.com/`). Los externos no lo llevan. |
-| `port` | Sí, si es externo | Nombre del proyecto del port. En los de GitHub se saca del repo. |
-| `author` | No | Autor del port. En los de GitHub se saca del repo; en los externos, si falta, sale "autor desconocido". |
-| `homepage` | No | Página oficial del proyecto (`https://…`). En los externos es el enlace que ve el usuario en lugar de "Ver en GitHub". |
-| `console` | Sí | Consola original. Una de: `Nintendo 64`, `Super Nintendo`, `NES`, `Game Boy`, `Game Boy Advance`, `Nintendo DS`, `Nintendo 3DS`, `GameCube`, `Wii`, `Wii U`, `Switch`, `Virtual Boy`, `PlayStation`, `PlayStation 2`, `PlayStation 3`, `PlayStation 4`, `PSP`, `Xbox`, `Xbox 360`, `Sega`, `Arcade`, `PC`, `Otros`. |
-| `franchise` | No | Saga, por ejemplo `"The Legend of Zelda"`. |
-| `aliases` | No | Otros nombres para la búsqueda y para emparejar enlaces de fuentes: `["CTR","Crash Team Racing"]`. |
-| `asset` | No | Qué archivo de la release es la build de Windows (ver abajo). Si no lo pones, el launcher elige el que más pinta tenga. |
-| `exe` | No | Nombre del ejecutable, por ejemplo `"CoD3.exe"`. Si no lo pones, se detecta al instalar. |
-| `experimental` | No | `true` si el port es una beta o pre-release. Sale marcado como experimental. |
-| `needs` | No | Qué datos acepta el port: `["iso","carpeta"]`, `["z64"]`… Si falta, se usan los de su consola (N64 → z64/n64/v64, GameCube → iso/rvz/gcm/ciso, Xbox 360 → iso/carpeta…). Ponlo solo si el port difiere. |
-| `needsNote` | No | Aclaración que verá el usuario: región o versión exigida, archivo concreto… |
-| `platforms` | No | Dónde funciona el port: `["Windows"]`, `["Windows","Linux","macOS"]`… Por defecto, `["Windows"]`. |
-| `id`, `game` | No | **No los toques**: se calculan solos a partir de `repo` (o `author` + `port`) y `title`. |
+| 📋 **Catálogo** | La lista de juegos y de sus ports: nombre, consola, portada, repositorio oficial y qué archivos necesita cada uno. | Lo mantiene el autor de Dársena y se actualiza solo al abrir el launcher. |
+| 🔗 **Fuentes** | Listas JSON con enlaces de descarga (torrent, magnet o directo) para ports o para tus datos. | **Tú.** Dársena no trae ninguna. |
+| 💾 **Tus datos** | Los archivos del juego original (ROM, ISO, carpeta del disco…) que pide cada port. | **Tú**, desde tu propia copia. |
 
-### El campo `asset`
+Al instalar, todo queda ordenado por juego:
 
-Muchas releases traen varios archivos (Windows, Linux, Android, mods, texturas…). `asset` es una expresión regular
-que dice cuál es el de Windows. Abre la página de *Releases* del repo, mira el nombre del archivo y cambia la versión por `.*`:
-
-| Archivo en la release | `asset` |
-|---|---|
-| `CoD3-PC-Port-0.4.0.zip` | `"^CoD3-PC-Port-.*\\.zip$"` |
-| `TwoTowers-Recompiled-v1.9.2-win64.zip` | `"^TwoTowers-Recompiled-.*-win64\\.zip$"` |
-| `VCSNative-Windows.zip` | `"^VCSNative-Windows\\.zip$"` |
-
-- El punto se escribe `\\.` (con dos barras, porque estamos dentro de JSON).
-- `^` significa "empieza por" y `$` "termina en".
-- Solo hace falta cuando la release tiene varios `.zip` o `.exe` que podrían confundirse.
-
-## Sinopsis, tráilers y destacados
-
-Cada ficha muestra de qué trata el juego y su tráiler. Eso sale de `catalog/info.json`, que **se genera** (no se edita a mano):
-
-```powershell
-node tools\catalog\informacion.mjs
+```
+DarsenaLibrary\
+└── Gears of War 2\
+    ├── gears-of-war-2-pc-port\   ← el port
+    └── Datos\                    ← tus archivos del juego
 ```
 
-Busca la sinopsis en Wikipedia (en español si existe) y solo acepta coincidencias seguras. Los juegos que no encuentra quedan
-en `catalog/info-pendientes.txt`. Lo que quieras poner o corregir a mano va en **`catalog/info-overrides.json`**, que siempre gana
-y nunca se sobrescribe:
+Más detalles en la **[wiki](https://github.com/theolivander97/darsena-launcher/wiki)**: cómo funcionan las fuentes,
+los datos del juego, las descargas, la cuenta de GitHub y los logros.
 
-```json
-{
-  "featured": ["gears-of-war-2", "bloodborne"],
-  "games": {
-    "id-del-juego": {
-      "synopsis": { "text": "De qué trata…", "source": { "name": "Redacción de Dársena" } },
-      "trailers": [ { "kind": "youtube", "id": "EQx0flOIRXY", "title": "Tráiler de lanzamiento" } ]
-    }
-  }
-}
-```
+## Descargar e instalar
 
-- **`featured`**: los juegos que salen siempre primero en el carrusel de *Destacados y novedades*, en ese orden.
-- **`id-del-juego`** es el campo `game` de `catalog.json` (el que agrupa los ports), no el `id` de un port.
-- **`trailers`**: `id` es lo que va después de `watch?v=` en la dirección de YouTube (11 caracteres). Comprueba que el vídeo permita
-  incrustarse: `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=<id>&format=json` debe responder con su título.
-- El texto de Wikipedia se muestra con su fuente y licencia (CC BY-SA 4.0).
-- `publicar.mjs` sube `info.json` junto al catálogo: los launchers lo descargan al abrirse, sin actualizar la app.
+1. Descarga **`Darsena_<versión>_x64-setup.exe`** desde la [última versión](https://github.com/theolivander97/darsena-launcher/releases/latest).
+2. Ejecútalo. Si Windows muestra *«Windows protegió su PC»*, pulsa **Más información → Ejecutar de todas formas**
+   (el instalador no lleva firma de código de Microsoft).
+3. Abre Dársena: comprobará si hay versiones nuevas y actualizará el catálogo.
 
-## Ports externos
+**Requisitos:** Windows 10 u 11 de 64 bits. Dársena usa WebView2, que ya viene con Windows 11
+(en Windows 10 el instalador lo instala si falta).
 
-Para ports que su autor publica fuera de GitHub:
+## Lo que Dársena no es
 
-1. Añádelo al catálogo con `"origin":"external"`, `"port"` y, si la hay, `"homepage"`.
-2. Ejecuta `actualizar.mjs` y mira el `id` que le ha puesto (por ejemplo `autor-nombre-del-proyecto`).
-3. Las descargas van en una **fuente**, en su lista `downloads`, usando ese `id` como `gameId`
-   (ver *Formato de una fuente* en el README principal). Ahí se ponen el torrent y los mirrors del port; los datos
-   del juego van en la lista `data` de la misma fuente.
+> [!IMPORTANT]
+> **Dársena no incluye ni distribuye juegos.** Ningún port del catálogo trae los archivos del juego original:
+> cada uno necesita **tu propia copia**. Las fuentes son de terceros y cada usuario decide cuáles añade y responde
+> de lo que descarga con ellas.
 
-Sin una fuente que lo traiga, el launcher muestra el juego pero el botón dice **NECESITA UNA FUENTE**.
-Las reglas de [qué ports se pueden añadir](#qué-ports-se-pueden-añadir) son las mismas: el port no puede incluir el juego.
+Los ports son obra de sus autores, enlazados a sus repositorios oficiales desde cada ficha.
 
-## Varios ports del mismo juego
+## Pedir un juego
 
-Si dos ports tienen el mismo `title` y la misma `console`, el launcher los junta en una sola ficha, con un selector de ports.
-Ojo con escribir el título igual: "Super Mario 64" y "Super Mario 64" se juntan; "Mario 64" no.
+El catálogo lo mantiene el autor de Dársena para que cada juego que entra funcione y cumpla las normas.
+**No se aceptan cambios directos al catálogo**: si conoces un port que debería estar, pídelo con la plantilla
+**[Pedir un juego](https://github.com/theolivander97/darsena-launcher/issues/new?template=pedir-un-juego.yml)**.
+¿Algo no funciona? Usa **[Reportar un problema](https://github.com/theolivander97/darsena-launcher/issues/new?template=reportar-un-problema.yml)**.
 
-Si dos juegos distintos se juntan por error, o al revés, corrígelo en `catalog/games-overrides.json`:
+## Créditos
 
-```json
-{
-  "voicedrew11-verdite1": "kings-field-japan"
-}
-```
+- Los **ports** pertenecen a sus autores; cada ficha enlaza a su proyecto.
+- **Portadas:** [libretro-thumbnails](https://github.com/libretro-thumbnails/libretro-thumbnails) y [SteamGridDB](https://www.steamgriddb.com/).
+- **Sinopsis:** [Wikipedia](https://es.wikipedia.org/) (CC BY-SA 4.0), con la fuente indicada en cada juego.
+- Hecho con [Tauri](https://tauri.app/), [Rust](https://www.rust-lang.org/) y [librqbit](https://github.com/ikatson/rqbit).
 
-La clave es el `id` del port (lo ves en `catalog.json` tras ejecutar `actualizar.mjs`) y el valor es el id del juego al que debe pertenecer.
-
-## Qué ports se pueden añadir
-
-Solo ports que **piden tu propia copia** del juego (ROM, ISO, `default.xex`, archivos del disco…) y cuya release **no incluye
-los datos del juego**. Pistas para comprobarlo:
-
-- El README dice algo como *"bring your own copy"*, *"no game data included"* o *"you need your own disc"*.
-- El tamaño de la release encaja con un ejecutable (decenas o cientos de MB), no con un juego completo (varios GB).
-- Desconfía de los que dicen *"no ROM needed"* en juegos de consola: suelen llevar el juego dentro.
-
-## Errores comunes
-
-| Mensaje | Solución |
-|---|---|
-| `no es JSON válido … Línea N` | Revisa esa línea y el final de la anterior: falta o sobra una coma, o hay comillas sin cerrar. |
-| `falta "title"` / `"repo"` / `"console"` | Añade ese campo. Si el port no está en GitHub, pon `"origin":"external"` y `"port"` en lugar de `repo`. |
-| `consola "…" no válida` | Usa exactamente uno de los nombres de la tabla (con mayúsculas y espacios). |
-| `"asset" no es una regex válida` | Revisa los `\\.` y que los paréntesis estén cerrados. |
-| `id "…" repetido` | Ese repo ya está en el catálogo. Búscalo con Ctrl+F y edita esa línea en lugar de añadir otra. |
+<div align="center"><sub>Los nombres y marcas de los juegos pertenecen a sus respectivos dueños. Dársena no está afiliado a ninguno de ellos.</sub></div>
