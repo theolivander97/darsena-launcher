@@ -29,7 +29,7 @@ del juego. **Dársena los reúne en un solo sitio**, con la comodidad de una tie
 - 📚 **Biblioteca** propia: añade juegos, elige entre varios ports del mismo juego, instala con un clic y juega.
 - ⚡ **Descargas rápidas**: desde las versiones oficiales de GitHub, por torrent o por enlace directo con varias
   conexiones a la vez. Pausar, reanudar y compartir lo que descargas.
-- 🧩 **Fuentes** al estilo Hydra: listas de enlaces que añades tú para traer tus propias copias de los juegos.
+- 🧩 **Fuentes**: listas de enlaces que añades tú para traer tus propias copias de los juegos.
 - ⭐ **Reseñas, perfil y logros** con tu cuenta de GitHub, y el tiempo de juego de cada título.
 - 🔄 **Siempre al día**: el catálogo se actualiza solo y el launcher se actualiza a sí mismo, con firma verificada.
 
