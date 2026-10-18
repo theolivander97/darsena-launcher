@@ -1,6 +1,21 @@
 {
- "updatedAt": "2026-10-17T20:46:49.783Z",
+ "updatedAt": "2026-10-18T01:10:40.472Z",
  "games": {
+  "naruto-rise-of-a-ninja": {
+   "average": 5,
+   "count": 1,
+   "discussionUrl": "https://github.com/theolivander97/darsena-launcher/discussions/4",
+   "reviews": [
+    {
+     "user": "kcherazo72",
+     "avatar": "https://avatars.githubusercontent.com/u/344151009?v=4",
+     "url": "https://github.com/kcherazo72",
+     "rating": 5,
+     "text": "Buen juego",
+     "date": "2026-10-18T01:10:38Z"
+    }
+   ]
+  },
   "cut-the-rope": {
    "average": 1,
    "count": 1,
