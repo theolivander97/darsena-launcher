@@ -9,39 +9,75 @@
     "gears-of-war-2": {
       "synopsis": {
         "text": "La humanidad contraataca. Marcus Fenix y el Escuadrón Delta llevan la guerra al subsuelo de Sera, el hogar de la Horda Locust, en una ofensiva desesperada para frenar al enemigo antes de que los últimos humanos se queden sin ciudad que defender. Gears of War 2 es un shooter en tercera persona de acción brutal y coberturas, con una campaña que se puede jugar en cooperativo para dos jugadores, el modo Horda, donde se resisten oleadas de enemigos junto a otros jugadores, y multijugador competitivo. Secuela de Gears of War (Epic Games, Xbox 360, 2008).",
-        "source": { "name": "Redacción de Dársena" }
+        "source": {
+          "name": "Redacción de Dársena"
+        }
       },
       "trailers": [
-        { "kind": "youtube", "id": "EQx0flOIRXY", "title": "Tráiler de lanzamiento" }
+        {
+          "kind": "youtube",
+          "id": "EQx0flOIRXY",
+          "title": "Tráiler de lanzamiento"
+        }
       ]
     },
     "bloodborne": {
       "synopsis": {
         "text": "Eres un Cazador que llega a Yharnam, una ciudad gótica de aire victoriano asolada por una plaga que convierte a sus habitantes en bestias. Buscas la «sangre pálida» que prometen como cura, y tendrás que cazar monstruos y horrores cósmicos durante noches interminables. Bloodborne es un action RPG de FromSoftware (los creadores de Dark Souls): combate rápido y agresivo, armas que cambian de forma, armas de fuego para desequilibrar al rival y un mundo oscuro lleno de secretos que casi nunca se explican. Exclusivo de PlayStation 4 (2015).",
-        "source": { "name": "Redacción de Dársena" }
+        "source": {
+          "name": "Redacción de Dársena"
+        }
       },
       "trailers": [
-        { "kind": "youtube", "id": "6Wz6bo1cS0E", "title": "Tráiler (PlayStation Latinoamérica)" },
-        { "kind": "youtube", "id": "G203e1HhixY", "title": "Debut Trailer (PlayStation)" }
+        {
+          "kind": "youtube",
+          "id": "6Wz6bo1cS0E",
+          "title": "Tráiler (PlayStation Latinoamérica)"
+        },
+        {
+          "kind": "youtube",
+          "id": "G203e1HhixY",
+          "title": "Debut Trailer (PlayStation)"
+        }
       ]
     },
     "call-of-duty-modern-warfare-2": {
       "synopsis": {
         "text": "Secuela directa de Call of Duty 4: Modern Warfare. Una campaña cinematográfica y a toda velocidad en la que la Fuerza de Tarea 141, con el sargento «Soap» MacTavish y el capitán Price, persigue a un terrorista ruso por escenarios de todo el mundo, mientras un soldado raso de los Rangers se juega la vida en el frente. Además de la campaña, incluye las Operaciones Especiales, misiones cooperativas para dos jugadores, y uno de los multijugadores online más influyentes de su época, con rachas de bajas, clases personalizables y niveles de prestigio. Infinity Ward, 2009.",
-        "source": { "name": "Redacción de Dársena" }
+        "source": {
+          "name": "Redacción de Dársena"
+        }
       },
       "trailers": [
-        { "kind": "youtube", "id": "TiFSSpYdPuc", "title": "Tráiler de presentación (Infinity Ward)" }
+        {
+          "kind": "youtube",
+          "id": "TiFSSpYdPuc",
+          "title": "Tráiler de presentación (Infinity Ward)"
+        }
       ]
     },
     "dragon-ball-z-budokai-tenkaichi-3": {
       "synopsis": {
         "text": "El juego de lucha más querido de Dragon Ball: más de 150 personajes jugables, de Goku y los saiyajin a Freezer, Cell y Majin Buu, con transformaciones, ataques especiales y combates libres en escenarios 3D. El modo Dragon Universe recorre la historia de Dragon Ball Z, desde la llegada de los saiyajin hasta Kid Buu, y permite jugar peleas «qué hubiera pasado si». Desarrollado por Spike (2007) para PlayStation 2 y Wii, es el título que muchos fans consideran el mejor de la saga.",
-        "source": { "name": "Redacción de Dársena" }
+        "source": {
+          "name": "Redacción de Dársena"
+        }
       },
       "trailers": [
-        { "kind": "youtube", "id": "38LtgnJzbWs", "title": "Tráiler oficial" }
+        {
+          "kind": "youtube",
+          "id": "38LtgnJzbWs",
+          "title": "Tráiler oficial"
+        }
       ]
+    },
+    "celeste-classic": {
+      "synopsis": {
+        "text": "Celeste Classic es el juego de plataformas original de Maddy Thorson y Noel Berry, creado en 2015 en cuatro días para la consola de fantasía PICO-8. Madeline escala la montaña Celeste a lo largo de 30 pantallas de saltos precisos, con un único impulso en el aire que se recarga al tocar el suelo. Fue la semilla del Celeste de 2018.",
+        "source": {
+          "name": "Redacción de Dársena"
+        }
+      }
     }
   }
 }
