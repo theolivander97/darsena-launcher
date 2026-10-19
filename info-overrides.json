@@ -17,9 +17,16 @@
         {
           "kind": "youtube",
           "id": "EQx0flOIRXY",
-          "title": "Tráiler de lanzamiento"
+          "title": "Tráiler de lanzamiento",
+          "titleEn": "Launch trailer"
         }
-      ]
+      ],
+      "synopsisEn": {
+        "text": "Humanity fights back. Marcus Fenix and Delta Squad take the war underground into Sera's depths, home of the Locust Horde, in a desperate offensive to stop the enemy before the last humans run out of cities to defend. Gears of War 2 is a brutal cover-based third-person shooter with a campaign playable in two-player co-op, Horde mode, where you hold off waves of enemies with other players, and competitive multiplayer. Sequel to Gears of War (Epic Games, Xbox 360, 2008).",
+        "source": {
+          "name": "Redacción de Dársena"
+        }
+      }
     },
     "bloodborne": {
       "synopsis": {
@@ -32,14 +39,21 @@
         {
           "kind": "youtube",
           "id": "6Wz6bo1cS0E",
-          "title": "Tráiler (PlayStation Latinoamérica)"
+          "title": "Tráiler (PlayStation Latinoamérica)",
+          "titleEn": "Trailer (PlayStation Latin America)"
         },
         {
           "kind": "youtube",
           "id": "G203e1HhixY",
           "title": "Debut Trailer (PlayStation)"
         }
-      ]
+      ],
+      "synopsisEn": {
+        "text": "You are a Hunter arriving in Yharnam, a Victorian-style gothic city ravaged by a plague that turns its people into beasts. You seek the \"pale blood\" promised as a cure, and must hunt monsters and cosmic horrors through endless nights. Bloodborne is an action RPG from FromSoftware (the makers of Dark Souls): fast, aggressive combat, trick weapons that change shape, firearms to stagger enemies and a dark world full of secrets that are rarely explained. A PlayStation 4 exclusive (2015).",
+        "source": {
+          "name": "Redacción de Dársena"
+        }
+      }
     },
     "call-of-duty-modern-warfare-2": {
       "synopsis": {
@@ -52,9 +66,16 @@
         {
           "kind": "youtube",
           "id": "TiFSSpYdPuc",
-          "title": "Tráiler de presentación (Infinity Ward)"
+          "title": "Tráiler de presentación (Infinity Ward)",
+          "titleEn": "Reveal trailer (Infinity Ward)"
         }
-      ]
+      ],
+      "synopsisEn": {
+        "text": "The direct sequel to Call of Duty 4: Modern Warfare. A fast-paced, cinematic campaign in which Task Force 141, with Sgt. \"Soap\" MacTavish and Captain Price, hunts a Russian terrorist across the globe while a Ranger private fights for his life on the front line. Beyond the campaign it includes Special Ops, two-player co-op missions, and one of the most influential online multiplayer modes of its time, with killstreaks, custom classes and prestige levels. Infinity Ward, 2009.",
+        "source": {
+          "name": "Redacción de Dársena"
+        }
+      }
     },
     "dragon-ball-z-budokai-tenkaichi-3": {
       "synopsis": {
@@ -67,13 +88,26 @@
         {
           "kind": "youtube",
           "id": "38LtgnJzbWs",
-          "title": "Tráiler oficial"
+          "title": "Tráiler oficial",
+          "titleEn": "Official trailer"
         }
-      ]
+      ],
+      "synopsisEn": {
+        "text": "The most beloved Dragon Ball fighting game: over 150 playable characters, from Goku and the Saiyans to Frieza, Cell and Majin Buu, with transformations, special attacks and free-roaming battles in 3D arenas. Dragon Universe mode retells the story of Dragon Ball Z, from the Saiyans' arrival to Kid Buu, and lets you play \"what if\" fights. Developed by Spike (2007) for PlayStation 2 and Wii, it is the entry many fans consider the best in the series.",
+        "source": {
+          "name": "Redacción de Dársena"
+        }
+      }
     },
     "celeste-classic": {
       "synopsis": {
         "text": "Celeste Classic es el juego de plataformas original de Maddy Thorson y Noel Berry, creado en 2015 en cuatro días para la consola de fantasía PICO-8. Madeline escala la montaña Celeste a lo largo de 30 pantallas de saltos precisos, con un único impulso en el aire que se recarga al tocar el suelo. Fue la semilla del Celeste de 2018.",
+        "source": {
+          "name": "Redacción de Dársena"
+        }
+      },
+      "synopsisEn": {
+        "text": "Celeste Classic is the original platformer by Maddy Thorson and Noel Berry, made in four days in 2015 for the PICO-8 fantasy console. Madeline climbs Celeste Mountain across 30 screens of precise jumps, with a single air dash that recharges when she touches the ground. It was the seed of 2018's Celeste.",
         "source": {
           "name": "Redacción de Dársena"
         }
