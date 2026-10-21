@@ -1,11 +1,36 @@
 // Lee las reseñas de la categoría "Reseñas" de Discussions y escribe reviews.json.
 // Mismo formato que entiende Dársena (src-tauri/src/reviews.rs):
-//   { updatedAt, games: { "<id-juego>": { average, count, discussionUrl, reviews: [{ user, avatar, url, rating, text, date }] } } }
+//   { updatedAt, games: { "<id-juego>": { average, count, discussionUrl, reviews: [{ user, avatar, url, rating, text, date, replies }] } } }
+// replies: respuestas de los desarrolladores del port (dueño o contribuidores de su repositorio, según catalog.json).
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 
 const CATEGORY = "reseñas";
 const [owner, name] = process.env.REPO.split("/");
 const MARK = /<!--\s*darsena:review rating=(\d)\s*-->/;
+const REPLY_MARK = "<!-- darsena:reply -->";
+
+// Desarrolladores de cada juego: dueño y contribuidores de los repos de sus ports.
+const catalog = existsSync("catalog.json") ? JSON.parse(readFileSync("catalog.json", "utf8")).games : [];
+const contributorsCache = new Map();
+async function contributors(repo) {
+  if (contributorsCache.has(repo)) return contributorsCache.get(repo);
+  const set = new Set([repo.split("/")[0].toLowerCase()]);
+  try {
+    const res = await fetch(`https://api.github.com/repos/${repo}/contributors?per_page=100`, {
+      headers: { Authorization: `Bearer ${process.env.GITHUB_TOKEN}`, "User-Agent": "darsena-reviews" },
+    });
+    if (res.ok) for (const c of await res.json()) if (c.login) set.add(c.login.toLowerCase());
+  } catch {}
+  contributorsCache.set(repo, set);
+  return set;
+}
+async function devsOf(gameId) {
+  const all = new Set();
+  for (const p of catalog.filter((g) => g.game === gameId && g.repo && g.origin !== "external")) {
+    for (const l of await contributors(p.repo)) all.add(l);
+  }
+  return all;
+}
 
 async function gql(query, variables) {
   const res = await fetch("https://api.github.com/graphql", {
@@ -43,7 +68,8 @@ do {
   const d = await gql(
     `query($o:String!,$n:String!,$c:ID!,$a:String){repository(owner:$o,name:$n){
       discussions(first:30,after:$a,categoryId:$c){pageInfo{hasNextPage endCursor}
-        nodes{title url comments(last:100){nodes{body createdAt isMinimized author{login avatarUrl url}}}}}}}`,
+        nodes{title url comments(last:100){nodes{body createdAt isMinimized author{login avatarUrl url}
+          replies(first:20){nodes{body createdAt isMinimized author{login avatarUrl url}}}}}}}}}`,
     { o: owner, n: name, c: cat.id, a: after },
   );
   const page = d.repository.discussions;
@@ -52,6 +78,7 @@ do {
     if (!id) continue;
     // Una reseña por usuario: la más reciente.
     const byUser = new Map();
+    const devs = await devsOf(id);
     for (const c of disc.comments.nodes) {
       if (c.isMinimized || !c.author) continue;
       const r = parse(c.body);
@@ -63,6 +90,9 @@ do {
         rating: r.rating,
         text: r.text,
         date: c.createdAt,
+        replies: (c.replies?.nodes ?? [])
+          .filter((x) => !x.isMinimized && x.author && devs.has(x.author.login.toLowerCase()))
+          .map((x) => ({ user: x.author.login, avatar: x.author.avatarUrl, url: x.author.url, text: x.body.replace(REPLY_MARK, "").trim(), date: x.createdAt })),
       });
     }
     const reviews = [...byUser.values()].sort((a, b) => b.date.localeCompare(a.date));
