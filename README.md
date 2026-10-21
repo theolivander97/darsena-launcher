@@ -6,7 +6,7 @@
 
 **El puerto de entrada a los ports de videojuegos hechos por la comunidad.**
 
-Un launcher al estilo Steam para descubrir, instalar y jugar ports nativos de PC:
+Un launcher para descubrir, instalar y jugar ports nativos de PC:
 recompilaciones, descompilaciones y motores reescritos de clásicos de consola y de PC.
 
 [![Última versión](https://img.shields.io/github/v/release/theolivander97/darsena-launcher?label=versi%C3%B3n&color=ffc20e&labelColor=111111)](https://github.com/theolivander97/darsena-launcher/releases/latest)
