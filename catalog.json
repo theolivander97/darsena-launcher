@@ -1,6 +1,6 @@
 {
 "schemaVersion": 1,
-"generatedAt": "2026-10-19",
+"generatedAt": "2026-10-21",
 "games": [
 {"id":"k4zmu2a-spacecadetpinball","title":"3D Pinball: Space Cadet","port":"spacecadetpinball","author":"k4zmu2a","origin":"github","repo":"k4zmu2a/spacecadetpinball","console":"PC","franchise":null,"aliases":["Space Cadet Pinball"],"asset":null,"exe":null,"experimental":false,"platforms":["Windows","Linux","macOS"],"addedAt":"2026-10-15","downloads":57041,"game":"3d-pinball-space-cadet"},
 {"id":"apancik-abuse-2025","title":"Abuse (1995)","port":"Abuse_2025","author":"apancik","origin":"github","repo":"apancik/Abuse_2025","console":"PC","franchise":null,"aliases":["Abuse 2025 · Abuse (1995)"],"asset":null,"exe":null,"experimental":false,"platforms":["Windows","Linux","macOS"],"addedAt":"2026-10-15","downloads":1193,"game":"abuse"},
