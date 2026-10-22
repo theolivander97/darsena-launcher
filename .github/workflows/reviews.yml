@@ -1,6 +1,6 @@
 # Genera reviews.json (resumen público de las reseñas de Discussions) para que Dársena
 # muestre notas y reseñas sin necesidad de iniciar sesión.
-name: Resumen de reseñas
+name: Resumen de reseñas y mods
 
 on:
   discussion:
@@ -32,16 +32,23 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
+      - name: Generar mods.json (Taller)
+        run: node .github/scripts/mods.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
       - name: Publicar si cambió
         run: |
-          if git diff --quiet -- reviews.json && git ls-files --error-unmatch reviews.json >/dev/null 2>&1; then
+          touch mods.json
+          if git diff --quiet -- reviews.json mods.json && git ls-files --error-unmatch reviews.json mods.json >/dev/null 2>&1; then
             echo "Sin cambios"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add reviews.json
-          git commit -m "Resumen público de reseñas"
+          [ -s mods.json ] || echo '{"mods":[]}' > mods.json
+          git add reviews.json mods.json
+          git commit -m "Resumen público de reseñas y mods"
           for i in 1 2 3; do
             git pull --rebase -q origin main && git push -q origin HEAD:main && exit 0
             sleep 5
