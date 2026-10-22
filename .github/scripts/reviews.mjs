@@ -8,6 +8,8 @@ const CATEGORY = "reseñas";
 const [owner, name] = process.env.REPO.split("/");
 const MARK = /<!--\s*darsena:review rating=(\d)\s*-->/;
 const REPLY_MARK = "<!-- darsena:reply -->";
+// «¿Funciona en tu PC?»: <!-- darsena:compat {"result":"good|ok|bad","port","cpu","gpu","ram"} -->
+const COMPAT = /<!--\s*darsena:compat\s*(\{[\s\S]*?\})\s*-->/;
 
 // Desarrolladores de cada juego: dueño y contribuidores de los repos de sus ports.
 const catalog = existsSync("catalog.json") ? JSON.parse(readFileSync("catalog.json", "utf8")).games : [];
@@ -78,9 +80,23 @@ do {
     if (!id) continue;
     // Una reseña por usuario: la más reciente.
     const byUser = new Map();
+    const compatByUser = new Map();
     const devs = await devsOf(id);
     for (const c of disc.comments.nodes) {
       if (c.isMinimized || !c.author) continue;
+      const cm = c.body.match(COMPAT);
+      if (cm) {
+        try {
+          const x = JSON.parse(cm[1]);
+          if (["good", "ok", "bad"].includes(x.result)) {
+            compatByUser.set(c.author.login, {
+              result: x.result, port: String(x.port ?? "").slice(0, 80), cpu: String(x.cpu ?? "").slice(0, 120),
+              gpu: String(x.gpu ?? "").slice(0, 120), ram: Number(x.ram) || 0, date: c.createdAt,
+            });
+          }
+        } catch {}
+        continue;
+      }
       const r = parse(c.body);
       if (!r) continue;
       byUser.set(c.author.login, {
@@ -96,9 +112,14 @@ do {
       });
     }
     const reviews = [...byUser.values()].sort((a, b) => b.date.localeCompare(a.date));
-    if (!reviews.length) continue;
-    const average = Math.round((reviews.reduce((a, r) => a + r.rating, 0) / reviews.length) * 100) / 100;
+    const reports = [...compatByUser.values()].sort((a, b) => b.date.localeCompare(a.date));
+    if (!reviews.length && !reports.length) continue;
+    const average = reviews.length ? Math.round((reviews.reduce((a, r) => a + r.rating, 0) / reviews.length) * 100) / 100 : 0;
     games[id] = { average, count: reviews.length, discussionUrl: disc.url, reviews };
+    if (reports.length) {
+      const n = (r) => reports.filter((x) => x.result === r).length;
+      games[id].compat = { good: n("good"), ok: n("ok"), bad: n("bad"), reports: reports.slice(0, 40) };
+    }
   }
   after = page.pageInfo.hasNextPage ? page.pageInfo.endCursor : null;
 } while (after);
