@@ -112,6 +112,20 @@
           "name": "Redacción de Dársena"
         }
       }
+    },
+    "super-smash-bros-ultimate": {
+      "synopsis": {
+        "text": "Todos están aquí. Super Smash Bros. Ultimate reúne a todos los luchadores de la historia de la saga, más de 80, junto a personajes de Mario, Zelda, Pokémon, Metroid, Sonic, Final Fantasy y muchas otras series, en más de 100 escenarios. Es un juego de lucha de plataformas donde no se gana vaciando una barra de vida: cuanto más daño recibe un luchador, más lejos sale volando, y gana quien lo saque del escenario. Incluye combates de hasta 8 jugadores, el modo Clásico con una ruta distinta para cada personaje, el modo Aventura «El mundo de Espíritus», el modo Espíritus con cientos de personajes coleccionables y un editor de escenarios.",
+        "source": {
+          "name": "Redacción de Dársena"
+        }
+      },
+      "synopsisEn": {
+        "text": "Everyone is here. Super Smash Bros. Ultimate brings together every fighter in the series’ history, over 80 of them, with characters from Mario, Zelda, Pokémon, Metroid, Sonic, Final Fantasy and many other series, across more than 100 stages. It is a platform fighter where you don’t win by emptying a health bar: the more damage a fighter takes, the farther they fly, and you win by knocking them off the stage. It includes battles of up to 8 players, Classic Mode with a different route for each character, the World of Light adventure mode, Spirits with hundreds of collectible characters, and a stage builder.",
+        "source": {
+          "name": "Redacción de Dársena"
+        }
+      }
     }
   }
 }
